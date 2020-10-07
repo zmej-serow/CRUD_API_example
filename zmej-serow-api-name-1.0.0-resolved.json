@@ -35,6 +35,17 @@
                     "example": "getAliases",
                     "default": "getAliases"
                   },
+                  "id": {
+                    "type": "integer",
+                    "description": "Request ID",
+                    "format": "int32",
+                    "example": 0
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "description": "JSON-RPC Version (2.0)",
+                    "example": "2.0"
+                  },
                   "params": {
                     "maxItems": 2,
                     "minItems": 2,
@@ -43,12 +54,7 @@
                     "nullable": false,
                     "items": {}
                   }
-                },
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/obligatory-schema"
-                  }
-                ]
+                }
               }
             }
           }
@@ -62,29 +68,6 @@
     }
   },
   "components": {
-    "schemas": {
-      "obligatory-schema": {
-        "required": [
-          "id",
-          "jsonrpc"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "Request ID",
-            "format": "int32",
-            "example": 0
-          },
-          "jsonrpc": {
-            "type": "string",
-            "description": "JSON-RPC Version (2.0)",
-            "example": "2.0"
-          }
-        },
-        "description": "JSON-RPC schema"
-      }
-    },
     "securitySchemes": {
       "BasicAuth": {
         "type": "http",
