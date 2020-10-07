@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "http://127.0.0.1:3000",
-      "description": "Server name"
+      "url": "http://localhost:8000",
+      "description": "Our glorious server name"
     }
   ],
   "security": [
@@ -17,34 +17,41 @@
     }
   ],
   "paths": {
-    "/plazmagun": {
+    "/getAliases": {
       "post": {
-        "summary": "shoots plazma",
-        "description": "Shoots plazma!",
-        "operationId": "plazmaGun",
+        "summary": "Get aliases",
+        "description": "Get aliases for current user",
+        "operationId": "getAliases",
         "requestBody": {
-          "description": "Fire plazma",
           "content": {
             "application/json": {
               "schema": {
+                "required": [
+                  "id",
+                  "jsonrpc",
+                  "method",
+                  "params"
+                ],
                 "type": "object",
                 "properties": {
                   "method": {
+                    "title": "getAliases",
                     "type": "string",
-                    "description": "Method name",
+                    "description": "Method name.",
                     "example": "getAliases",
                     "default": "getAliases"
                   },
                   "id": {
+                    "title": "JSON-RPC request ID",
                     "type": "integer",
-                    "description": "Request ID",
+                    "description": "The \"id\" is returned in the corresponding response object, so you can map one context to the other.\nIf you are making synchronous single calls, it might not make sense, but in an async call environment it is vital.\nIt should not be hard coded to 1, but set to a unique value for every request object.",
                     "format": "int32",
                     "example": 0
                   },
                   "jsonrpc": {
+                    "title": "JSON-RPC Version (2.0)",
                     "type": "string",
-                    "title": "necessaire jrpc declaration",
-                    "description": "JSON-RPC Version (2.0)",
+                    "description": "JSON-RPC protocol mark.",
                     "example": "2.0"
                   },
                   "params": {
@@ -62,7 +69,7 @@
         },
         "responses": {
           "201": {
-            "description": "plazma launched"
+            "description": "todo method description"
           }
         }
       }
