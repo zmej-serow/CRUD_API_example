@@ -52,7 +52,7 @@
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/common"
+                    "$ref": "#/components/schemas/request-common"
                   }
                 ]
               }
@@ -60,8 +60,34 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "todo method description"
+          "200": {
+            "description": "JSON-RPC response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "title": "aliases goes here",
+                          "type": "array",
+                          "description": "Response result",
+                          "example": [
+                            1,
+                            2
+                          ],
+                          "items": {}
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/error"
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
@@ -69,7 +95,64 @@
   },
   "components": {
     "schemas": {
-      "common": {
+      "response-common": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "JSON-RPC request ID",
+            "type": "integer",
+            "description": "ID of corresponding request",
+            "example": 0
+          },
+          "jsonrpc": {
+            "title": "JSON-RPC Version (2.0)",
+            "type": "string",
+            "description": "JSON-RPC protocol mark.",
+            "example": "2.0"
+          }
+        }
+      },
+      "error": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/response-common"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "JSON-RPC error type",
+                    "type": "string",
+                    "description": "JSON-RPC error mark",
+                    "example": "JsonRpcInvalidParamsError"
+                  },
+                  "code": {
+                    "title": "JSON-RPC error code",
+                    "type": "integer",
+                    "description": "Reference to error code",
+                    "example": -32000
+                  },
+                  "data": {
+                    "type": "array",
+                    "nullable": true,
+                    "items": {}
+                  },
+                  "message": {
+                    "title": "Error description",
+                    "type": "string",
+                    "description": "Human-readable error explanation",
+                    "example": "JsonRpcInvalidParamsError: Limit reached"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "request-common": {
         "required": [
           "id",
           "jsonrpc"
