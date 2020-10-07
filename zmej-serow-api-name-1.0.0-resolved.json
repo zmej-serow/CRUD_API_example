@@ -26,43 +26,35 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "id",
-                  "jsonrpc",
-                  "method",
-                  "params"
-                ],
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "title": "getAliases",
-                    "type": "string",
-                    "description": "Method name.",
-                    "example": "getAliases",
-                    "default": "getAliases"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/common"
                   },
-                  "id": {
-                    "title": "JSON-RPC request ID",
-                    "type": "integer",
-                    "description": "The \"id\" is returned in the corresponding response object, so you can map one context to the other.\nIf you are making synchronous single calls, it might not make sense, but in an async call environment it is vital.\nIt should not be hard coded to 1, but set to a unique value for every request object.",
-                    "format": "int32",
-                    "example": 0
-                  },
-                  "jsonrpc": {
-                    "title": "JSON-RPC Version (2.0)",
-                    "type": "string",
-                    "description": "JSON-RPC protocol mark.",
-                    "example": "2.0"
-                  },
-                  "params": {
-                    "maxItems": 2,
-                    "minItems": 2,
-                    "type": "array",
-                    "description": "profile id, name",
-                    "nullable": false,
-                    "items": {}
+                  {
+                    "required": [
+                      "method",
+                      "params"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "method": {
+                        "title": "getAliases",
+                        "type": "string",
+                        "description": "Method name.",
+                        "example": "getAliases",
+                        "default": "getAliases"
+                      },
+                      "params": {
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array",
+                        "description": "profile id, name",
+                        "nullable": false,
+                        "items": {}
+                      }
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -76,6 +68,30 @@
     }
   },
   "components": {
+    "schemas": {
+      "common": {
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "JSON-RPC request ID",
+            "type": "integer",
+            "description": "The \"id\" is returned in the corresponding response object, so you can map one context to the other.\nIf you are making synchronous single calls, it might not make sense, but in an async call environment it is vital.\nIt should not be hard coded to 1, but set to a unique value for every request object.",
+            "format": "int32",
+            "example": 0
+          },
+          "jsonrpc": {
+            "title": "JSON-RPC Version (2.0)",
+            "type": "string",
+            "description": "JSON-RPC protocol mark.",
+            "example": "2.0"
+          }
+        }
+      }
+    },
     "securitySchemes": {
       "BasicAuth": {
         "type": "http",
