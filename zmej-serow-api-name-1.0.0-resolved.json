@@ -28,9 +28,6 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/common"
-                  },
-                  {
                     "required": [
                       "method",
                       "params"
@@ -53,6 +50,9 @@
                         "items": {}
                       }
                     }
+                  },
+                  {
+                    "$ref": "#/components/schemas/common"
                   }
                 ]
               }
