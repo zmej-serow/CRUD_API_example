@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "api-title",
+    "description": "api-description",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000",
+      "description": "Server name"
+    }
+  ],
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ],
+  "paths": {
+    "/plazmagun": {
+      "post": {
+        "summary": "shoots plazma",
+        "description": "Shoots plazma!",
+        "operationId": "plazmaGun",
+        "requestBody": {
+          "description": "Fire plazma",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "description": "Method name",
+                    "example": "getAliases",
+                    "default": "getAliases"
+                  },
+                  "params": {
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "type": "array",
+                    "description": "profile id, name",
+                    "nullable": false,
+                    "items": {}
+                  }
+                },
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/obligatory-schema"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "plazma launched"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "obligatory-schema": {
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Request ID",
+            "format": "int32",
+            "example": 0
+          },
+          "jsonrpc": {
+            "type": "string",
+            "description": "JSON-RPC Version (2.0)",
+            "example": "2.0"
+          }
+        },
+        "description": "JSON-RPC schema"
+      }
+    },
+    "securitySchemes": {
+      "BasicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
