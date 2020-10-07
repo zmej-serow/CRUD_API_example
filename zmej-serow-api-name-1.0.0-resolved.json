@@ -67,19 +67,26 @@
                 "schema": {
                   "oneOf": [
                     {
-                      "type": "object",
-                      "properties": {
-                        "result": {
-                          "title": "aliases goes here",
-                          "type": "array",
-                          "description": "Response result",
-                          "example": [
-                            1,
-                            2
-                          ],
-                          "items": {}
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "result": {
+                              "title": "aliases goes here",
+                              "type": "array",
+                              "description": "Response result",
+                              "example": [
+                                1,
+                                2
+                              ],
+                              "items": {}
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/response-common"
                         }
-                      }
+                      ]
                     },
                     {
                       "$ref": "#/components/schemas/error"
