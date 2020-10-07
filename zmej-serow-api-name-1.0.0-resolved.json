@@ -43,6 +43,7 @@
                   },
                   "jsonrpc": {
                     "type": "string",
+                    "title": "necessaire jrpc declaration",
                     "description": "JSON-RPC Version (2.0)",
                     "example": "2.0"
                   },
